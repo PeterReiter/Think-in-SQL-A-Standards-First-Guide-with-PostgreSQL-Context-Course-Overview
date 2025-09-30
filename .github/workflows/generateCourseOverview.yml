@@ -1,1 +1,10 @@
+name: Regenerate course overview
 
+on:
+  repository_dispatch:
+    types: [new_version]
+  push:
+
+env:
+  EXPORTFOLDER: 'assets'
+  REPOSITORYFOLDER: 'repository'
