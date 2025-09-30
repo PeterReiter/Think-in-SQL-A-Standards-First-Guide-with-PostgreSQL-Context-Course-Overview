@@ -66,16 +66,15 @@ jobs:
           path: repository
           key: repository-${{ github.sha }}
 
-      - name: Commit and push changes
+      - name:  Commit Changed Files
         run: |
           cd ${REPOSITORYFOLDER}
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "Add new export version of courses" || echo "No changes to commit"
-
-          # Fix authentication by updating remote URL with token
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git push
-        env:
+          
+      - name: Push Changed Files
+        uses: ad-m/github-push-action@master
+        with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
