@@ -77,5 +77,5 @@ jobs:
       - name: Push Changed Files
         uses: ad-m/github-push-action@master
         with:
-          directory: ${{REPOSITORYFOLDER}}
+          directory: ${{ REPOSITORYFOLDER }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
