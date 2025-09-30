@@ -59,6 +59,8 @@ jobs:
     needs: 
       [run_index]
     runs-on: ubuntu-latest
+    permissions:
+      contents: read, write
     steps:
       - name: Restore repository
         uses: actions/cache@v3
