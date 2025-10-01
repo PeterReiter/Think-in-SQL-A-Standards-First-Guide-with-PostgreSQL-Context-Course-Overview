@@ -30,8 +30,34 @@ jobs:
         with:
           path: repository
           key: repository-${{ github.sha }}
-      
+  
+  run_index:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore repository
+        uses: actions/cache@v3
+        with:
+          path: repository
+          key: repository-${{ github.sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          # Removed npm cache that was causing failures
+
+      - name: Install LiaScript exporter
+        run: npm install -g @liascript/exporter
+
+      - name: Run exporter for index
+        run: |
+          cd ${REPOSITORYFOLDER}
+          liaex -i index.yml -o index --format project --project-category-blur
+          
   commit:
+    needs:
+      [run_index]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
