@@ -58,13 +58,7 @@ jobs:
           cd ${REPOSITORYFOLDER}
           liaex -i index.yml -o index --format project --project-category-blur
           ls
-          
-      - name: Cache repository
-        uses: actions/cache@v3
-        with:
-          path: repository
-          key: repository-${{ github.sha }}
-          
+              
   commit:
     needs:
       [run_index]
