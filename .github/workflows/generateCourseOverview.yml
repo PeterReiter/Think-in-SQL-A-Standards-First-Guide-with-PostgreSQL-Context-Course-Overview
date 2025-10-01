@@ -24,6 +24,12 @@ jobs:
         run: |
           rm -rf ${REPOSITORYFOLDER}/${EXPORTFOLDER}
           mkdir -p ${REPOSITORYFOLDER}/${EXPORTFOLDER}
+
+      - name: Cache repository
+        uses: actions/cache@v3
+        with:
+          path: repository
+          key: repository-${{ github.sha }}
       
   commit:
     runs-on: ubuntu-latest
