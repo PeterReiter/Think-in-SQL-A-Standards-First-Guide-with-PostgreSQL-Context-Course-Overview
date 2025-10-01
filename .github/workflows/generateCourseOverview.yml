@@ -2,11 +2,11 @@ name: Regenerate course overview
 
 on:
 
-  #repository_dispatch:
-  #  types: [new_version]
-  #push:
+  repository_dispatch:
+    types: [new_version]
+  push:
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  # workflow_dispatch:
 
 env:
   EXPORTFOLDER: 'assets'
