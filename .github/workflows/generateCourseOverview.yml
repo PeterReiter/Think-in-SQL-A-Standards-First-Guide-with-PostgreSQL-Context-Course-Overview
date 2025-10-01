@@ -19,6 +19,11 @@ jobs:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
           fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
           path: repository
+          
+      - name: Delete and redefine folder for exports
+        run: |
+          rm -rf ${REPOSITORYFOLDER}/${EXPORTFOLDER}
+          mkdir -p ${REPOSITORYFOLDER}/${EXPORTFOLDER}
       
   commit:
     runs-on: ubuntu-latest
