@@ -56,6 +56,7 @@ jobs:
       - name: Run exporter for index
         run: |
           cd ${REPOSITORYFOLDER}
+          ls
           liaex -i index.yml -o index --format project --project-category-blur
           
   commit:
