@@ -58,29 +58,43 @@ jobs:
           cd ${REPOSITORYFOLDER}
           liaex -i index.yml -o index --format project --project-category-blur
           ls
+
+      - name: Commit files
+        run: |
+         cd ${REPOSITORYFOLDER}
+         ls
+         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+         git config --local user.name "github-actions[bot]"
+         git add .
+         git commit -m "Add new export version of courses" || echo "No changes to commit"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+         directory: repository
+         github_token: ${{ secrets.GITHUB_TOKEN }}
+         branch: ${{ github.ref }}
               
-  commit:
-    needs:
-      [run_index]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Restore repository
-      uses: actions/cache@v3
-      with:
-        path: repository
-        key: repository-${{ github.sha }}
-        
-    - name: Commit files
-      run: |
-        cd ${REPOSITORYFOLDER}
-        ls
-        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
-        git add .
-        git commit -m "Add new export version of courses" || echo "No changes to commit"
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        directory: repository
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
+  #commit:
+  #  needs:
+  #    [run_index]
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #  - name: Restore repository
+  #    uses: actions/cache@v3
+  #    with:
+  #      path: repository
+  #      key: repository-${{ github.sha }}
+  #    - name: Commit files
+  #    run: |
+  #      cd ${REPOSITORYFOLDER}
+  #      ls
+  #      git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+  #      git config --local user.name "github-actions[bot]"
+  #      git add .
+  #      git commit -m "Add new export version of courses" || echo "No changes to commit"
+  #  - name: Push changes
+  #    uses: ad-m/github-push-action@master
+  #    with:
+  #      directory: repository
+  #      github_token: ${{ secrets.GITHUB_TOKEN }}
+  #      branch: ${{ github.ref }}
